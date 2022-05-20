@@ -911,7 +911,7 @@ function lib:Window(text, preset, closebind)
                 end
             )
 
-            local events = {}
+            local items = {}
             for i, v in next, list do
                 itemcount = itemcount + 1
                 if itemcount <= 3 then
@@ -936,7 +936,7 @@ function lib:Window(text, preset, closebind)
                 ItemCorner.Name = "ItemCorner"
                 ItemCorner.Parent = Item
 
-                local me = Item.MouseEnter:Connect(
+                Item.MouseEnter:Connect(
                     function()
                         TweenService:Create(
                             Item,
@@ -946,7 +946,7 @@ function lib:Window(text, preset, closebind)
                     end
                 )
 
-                local ml = Item.MouseLeave:Connect(
+                Item.MouseLeave:Connect(
                     function()
                         TweenService:Create(
                             Item,
@@ -956,7 +956,7 @@ function lib:Window(text, preset, closebind)
                     end
                 )
 
-                local mc = Item.MouseButton1Click:Connect(
+                Item.MouseButton1Click:Connect(
                     function()
                         droptog = not droptog
                         DropdownTitle.Text = text .. " - " .. v
@@ -977,19 +977,20 @@ function lib:Window(text, preset, closebind)
                         Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
                     end
                 )
-                table.append(events,me)
-                table.append(events,ml)
-                table.append(events,mc)
+                table.append(items,Item)
 
                 DropItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropLayout.AbsoluteContentSize.Y)
             end
             local dp = {}
 
-            function dp:refresh()
-                for _,v in pairs(events) do
-                    v:Disconnect()
+            function dp:refresh(t)
+                itemcount = 0
+                framesize = framesize - 26
+                DropItemHolder.Size = UDim2.new(0, 342, 0, 0)
+                for _,v in pairs(items) do
+                    v:Destroy()
                 end
-                for i, v in next, list do
+                for i, v in next, t do
                     itemcount = itemcount + 1
                     if itemcount <= 3 then
                         framesize = framesize + 26
@@ -1013,7 +1014,7 @@ function lib:Window(text, preset, closebind)
                     ItemCorner.Name = "ItemCorner"
                     ItemCorner.Parent = Item
     
-                    local me = Item.MouseEnter:Connect(
+                    Item.MouseEnter:Connect(
                         function()
                             TweenService:Create(
                                 Item,
@@ -1023,7 +1024,7 @@ function lib:Window(text, preset, closebind)
                         end
                     )
     
-                    local ml = Item.MouseLeave:Connect(
+                    Item.MouseLeave:Connect(
                         function()
                             TweenService:Create(
                                 Item,
@@ -1054,9 +1055,7 @@ function lib:Window(text, preset, closebind)
                             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
                         end
                     )
-                    table.append(events,me)
-                    table.append(events,ml)
-                    table.append(events,mc)
+                    table.append(items,Item)
     
                     DropItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropLayout.AbsoluteContentSize.Y)
                 end
