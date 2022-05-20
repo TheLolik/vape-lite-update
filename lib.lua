@@ -977,7 +977,7 @@ function lib:Window(text, preset, closebind)
                         Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
                     end
                 )
-                table.append(items,Item)
+                table.insert(items,Item)
 
                 DropItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropLayout.AbsoluteContentSize.Y)
             end
@@ -1055,7 +1055,7 @@ function lib:Window(text, preset, closebind)
                             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
                         end
                     )
-                    table.append(items,Item)
+                    table.insert(items,Item)
     
                     DropItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropLayout.AbsoluteContentSize.Y)
                 end
