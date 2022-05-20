@@ -911,7 +911,7 @@ function lib:Window(text, preset, closebind)
                 end
             )
 
-            local items = {}
+            items = {}
             for i, v in next, list do
                 itemcount = itemcount + 1
                 if itemcount <= 3 then
